@@ -101,6 +101,7 @@ def print_table(inventory, order=None):
     label_2 = 'item name'
     # Spacing between each column in table
     spacing = 3
+    values_spacing = 4
     # Find the longest string in each column of the table so the column can be wide enough to fit all the values.
     max_key_length = max(max(len(x) for x in inventory), len(label_1))
     max_value_length = max(max(len(str(x)) for x in inventory.values()), len(label_2))
@@ -118,10 +119,10 @@ def print_table(inventory, order=None):
     # Print the table using rjust - a build-in function which right justifies the values.
     print('Inventory:')
     print(label_1.rjust(max_value_length), label_2.rjust(max_key_length + spacing))
-    print('-' * (max_key_length + max_value_length + spacing + 1))
+    print('-' * (max_key_length + max_value_length + values_spacing))
     for k, v in sorted_inventory:
         print(repr(v).rjust(max_value_length), k.rjust(max_key_length + spacing))
-    print('-' * (max_key_length + max_value_length + spacing + 1))
+    print('-' * (max_key_length + max_value_length + values_spacing))
     print('Total number of items: %d' % sum(inventory.values()))
 
 
@@ -166,9 +167,24 @@ def export_inventory(inventory, filename="export_inventory.csv"):
 
 def main():
     """
-    Main function sets initial variables and stores rest of the functions
+    Main function tests all the other functions
     """
-    pass
+    inv = {'rope': 1, 'torch': 6, 'gold coin': 42, 'dagger': 1, 'arrow': 12}
+    print_table(inv)
+    dragon_loot = ['gold coin', 'dagger', 'gold coin', 'gold coin', 'ruby']
+    inv = add_to_inventory(inv, dragon_loot)
+    display_inventory(inv)
+    print_table(inv, order='count,desc')
+    inv = remove_from_inventory(inv, dragon_loot)
+    print_table(inv, order='count,asc')
+    inv = change_item_name(inv, 'gold coin', 'red coin')
+    print_table(inv, order='count,desc')
+    inv = set_item_value(inv, 'red coin', 200)
+    print_table(inv, order='count,desc')
+    inv = {}
+    import_inventory(inv, 'test_inventory.csv')
+    print_table(inv, order='count,asc')
+    export_inventory(inv)
 
 
 if __name__ == "__main__":
