@@ -26,7 +26,7 @@ dragon_loot = ['gold coin', 'dagger', 'gold coin', 'gold coin', 'ruby']
 Write a function named add_to_inventory(inventory, added_items), where the inventory parameter is a dictionary representing the player’s inventory and the added_items parameter is a list like dragon_loot. The add_to_inventory() function should return a dictionary that represents the updated inventory. Note that the added_items list can contain multiples of the same item. Your code could look something like this:
 
 def add_to_inventory(inventory, added_items):
-# your code goes here
+your code goes here
 
 dragon_loot = ['gold coin', 'dagger', 'gold coin', 'gold coin', 'ruby']
 inv = add_to_inventory(inv, dragon_loot)
